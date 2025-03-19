@@ -1,0 +1,15 @@
+base: "YOUR DOMAIN" # DO NOT INCLUDE "/" AT THE END.
+
+name: "YOUR NAME"
+github: "YOUR GITHUB USERNAME"
+
+giscus:
+  repo: "[ENTER REPO HERE]"
+  repoId: "[ENTER REPO ID HERE]"
+  category: "[ENTER CATEGORY NAME HERE]"
+  categoryId: "[ENTER CATEGORY ID HERE]"
+  mapping: "pathname"
+  reactionsEnabled: "1"
+  inputPosition: "bottom"
+  theme: "light"
+  lang: "en"

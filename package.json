@@ -1,0 +1,25 @@
+{
+  "name": "minimic-discaptive",
+  "version": "1.0.0",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js && npx prettier 'public/' --write",
+    "local": "npx serve public",
+    "dev": "npx nodemon --watch . -e js,json,html,yaml,md --ignore ./public --exec 'npm run build && npm run local'",
+    "css": "npx @tailwindcss/cli -i ./templates/input.css -o ./public/styles/output.css --minify"
+  },
+  "author": "discaptive",
+  "license": "MIT",
+  "type": "module",
+  "description": "minimic-discaptive",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.14",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "marked": "^15.0.7",
+    "tailwindcss": "^4.0.14"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16"
+  }
+}
