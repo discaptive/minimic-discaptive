@@ -244,6 +244,6 @@ if (!fs.existsSync(OUTPUT_DIR)) {
 }
 
 cleanDirectory("public", ["styles", "favicon.ico", "logo.png", "robots.txt"]);
-// generateIndexPage();
-// generatePostPage();
-// generateSitemap();
+generateIndexPage();
+generatePostPage();
+generateSitemap();
