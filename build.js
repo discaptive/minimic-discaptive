@@ -169,16 +169,16 @@ function generatePostPage() {
       fs.readFileSync(indexPath, "utf-8")
     );
 
-    const adjustImagePaths = (htmlContent) => {
-      return htmlContent.replace(/<img src="([^"]+)"/g, (match, src) => {
-        if (src.startsWith("http")) {
-          return match;
-        }
+    // const adjustImagePaths = (htmlContent) => {
+    //   return htmlContent.replace(/<img src="([^"]+)"/g, (match, src) => {
+    //     if (src.startsWith("http")) {
+    //       return match;
+    //     }
 
-        const newSrc = path.join(dir, src).replace(/\\/g, "/");
-        return `<img src="${newSrc}"`;
-      });
-    };
+    //     const newSrc = path.join(dir, src).replace(/\\/g, "/");
+    //     return `<img src="${newSrc}"`;
+    //   });
+    // };
 
     const postContent = renderTemplate(postDetailTemplate, {
       date: metadata.date,
@@ -190,7 +190,8 @@ function generatePostPage() {
       title: metadata.title,
       github: config.author.github,
       name: config.author.name,
-      content: adjustImagePaths(marked.parse(content)),
+      // content: adjustImagePaths(marked.parse(content)),
+      content: marked.parse(content),
       repo: config.giscus.repo,
       repoId: config.giscus.repoId,
       category: config.giscus.category,
