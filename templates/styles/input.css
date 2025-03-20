@@ -14,14 +14,6 @@
   src: url("/fonts/InterVariable.woff2") format("woff2");
 }
 
-@font-face {
-  font-family: Source;
-  font-style: normal;
-  font-weight: 200 900;
-  font-display: swap;
-  src: url("/fonts/SourceCodePro-VariableFont_wght.ttf") format("truetype");
-}
-
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
