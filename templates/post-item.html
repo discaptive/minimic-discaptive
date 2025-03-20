@@ -1,12 +1,13 @@
-<div class="flex flex-col lg:flex-row">
+<!-- localeDate, title, preview -->
+<div class="flex flex-col justify-between sm:flex-row gap-4">
   <div
-    class="w-64 mb-4 font-mono text-xs/6 font-medium tracking-widest text-gray-500 uppercase"
+    class="font-mono flex-shrink-0 w-48 mb-2 text-sm/6 font-medium tracking-wider text-gray-500 uppercase"
   >
     {{localeDate}}
   </div>
 
-  <div class="max-w-2xl">
-    <a class="font-semibold text-base" href="/{{slug}}">{{title}}</a>
+  <div class="max-w-[620px]">
+    <a class="font-semibold" href="{{slug}}">{{title}}</a>
 
     <div class="text-sm text-gray-700 mt-4 line-clamp-3 leading-7">
       {{preview}}

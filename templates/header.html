@@ -1,27 +1,95 @@
-<header class="fixed inset-x-0 max-w-6xl mx-auto top-0">
-  <div class="z-10 border-b border-black/5 bg-white">
-    <div class="flex h-14 items-center justify-between px-4 sm:px-6">
-      <a class="flex items-center gap-2" aria-label="Home" href="/">
-        <svg
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="40" height="40" rx="10" fill="white" />
-          <path d="M35 20C35 11.7157 28.2843 5 20 5V20H35Z" fill="#92487E" />
-          <path d="M20 35C28.2843 35 35 28.2843 35 20H20V35Z" fill="#D55D45" />
-          <path d="M20 5C11.7157 5 5 11.7157 5 20H20V5Z" fill="#51519F" />
-          <path d="M5 20C5 28.2843 11.7157 35 20 35V20H5Z" fill="black" />
+<!-- name, resume, github -->
+<header class="sticky top-0 z-10 border-b border-black/5 bg-white">
+  <div class="flex h-14 items-center justify-between">
+    <a
+      class="p-2 flex flex-shrink-0 items-center gap-2"
+      aria-label="Home"
+      href="/"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g clip-path="url(#clip0_23_3)">
+          <circle cx="10" cy="10" r="10" fill="black" />
           <path
-            d="M19.375 34.3617C11.9331 34.0433 5.9567 28.0669 5.63834 20.625H19.375V34.3617ZM19.375 19.375H5.63834C5.9567 11.9331 11.9331 5.9567 19.375 5.63834V19.375ZM20.625 34.3617V20.625H34.3617C34.0433 28.0669 28.0669 34.0433 20.625 34.3617ZM34.3617 19.375H20.625V5.63834C28.0669 5.9567 34.0433 11.9331 34.3617 19.375Z"
-            stroke="white"
-            stroke-width="1.25"
+            d="M17.5 10C17.5 5.85786 14.1421 2.5 10 2.5V10H17.5Z"
+            fill="#92487E"
           />
-        </svg>
+          <path
+            d="M10 17.5C14.1421 17.5 17.5 14.1421 17.5 10H10V17.5Z"
+            fill="#D55D45"
+          />
+          <path
+            d="M10 2.5C5.85786 2.5 2.5 5.85786 2.5 10H10V2.5Z"
+            fill="#51519F"
+          />
+          <path
+            d="M2.5 10C2.5 14.1421 5.85786 17.5 10 17.5V10H2.5Z"
+            fill="black"
+          />
+          <path
+            d="M9.6875 17.1808C5.96655 17.0217 2.97835 14.0335 2.81917 10.3125H9.6875V17.1808ZM9.6875 9.6875H2.81917C2.97835 5.96655 5.96655 2.97835 9.6875 2.81917V9.6875ZM10.3125 17.1808V10.3125H17.1808C17.0217 14.0335 14.0335 17.0217 10.3125 17.1808ZM17.1808 9.6875H10.3125V2.81917C14.0335 2.97835 17.0217 5.96655 17.1808 9.6875Z"
+            stroke="white"
+            stroke-width="0.625"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_23_3">
+            <rect width="20" height="20" rx="10" fill="white" />
+          </clipPath>
+        </defs>
+      </svg>
 
-        <span class="text-lg font-medium">{{name}}</span>
+      <span class="font-medium">{{name}}</span>
+    </a>
+
+    <div class="flex items-center gap-2">
+      <a
+        href="{{resume}}"
+        target="_blank"
+        class="group relative px-1.5 text-sm text-indigo-800"
+      >
+        <span
+          class="absolute inset-0 border border-dashed border-indigo-300/60 bg-indigo-400/10 group-hover:bg-indigo-400/15 dark:border-indigo-300/30"
+        >
+        </span>
+        resume.pdf
+        <svg
+          width="5"
+          height="5"
+          viewBox="0 0 5 5"
+          class="absolute top-[-2px] left-[-2px] fill-indigo-300"
+        >
+          <path d="M2 0h1v2h2v1h-2v2h-1v-2h-2v-1h2z"></path>
+        </svg>
+        <svg
+          width="5"
+          height="5"
+          viewBox="0 0 5 5"
+          class="absolute top-[-2px] right-[-2px] fill-indigo-300"
+        >
+          <path d="M2 0h1v2h2v1h-2v2h-1v-2h-2v-1h2z"></path>
+        </svg>
+        <svg
+          width="5"
+          height="5"
+          viewBox="0 0 5 5"
+          class="absolute bottom-[-2px] left-[-2px] fill-indigo-300"
+        >
+          <path d="M2 0h1v2h2v1h-2v2h-1v-2h-2v-1h2z"></path>
+        </svg>
+        <svg
+          width="5"
+          height="5"
+          viewBox="0 0 5 5"
+          class="absolute right-[-2px] bottom-[-2px] fill-indigo-300"
+        >
+          <path d="M2 0h1v2h2v1h-2v2h-1v-2h-2v-1h2z"></path>
+        </svg>
       </a>
 
       <a

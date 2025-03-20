@@ -1,7 +1,9 @@
-base: "YOUR DOMAIN" # DO NOT INCLUDE "/" AT THE END.
+base: "https://discaptive.com" # DO NOT INCLUDE "/" AT THE END.
 
-name: "YOUR NAME"
-github: "YOUR GITHUB USERNAME"
+author:
+  name: "Y.S. LEE"
+  github: "discaptive"
+  resume: "https://discaptive.com"
 
 giscus:
   repo: "[ENTER REPO HERE]"

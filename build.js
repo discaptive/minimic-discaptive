@@ -2,7 +2,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import yaml from "js-yaml";
-import { marked } from "marked";
+import { Marked } from "marked";
+import { markedHighlight } from "marked-highlight";
+import hljs from "highlight.js";
 
 const CONTENT_DIR = "content";
 const OUTPUT_DIR = "public";
@@ -10,6 +12,17 @@ const TEMPLATE_DIR = "templates";
 const CONFIG_PATH = "config.yaml";
 
 const config = yaml.load(fs.readFileSync(CONFIG_PATH, "utf-8"));
+
+const marked = new Marked(
+  markedHighlight({
+    emptyLangClass: "hljs",
+    langPrefix: "hljs language-",
+    highlight(code, lang, _) {
+      const language = hljs.getLanguage(lang) ? lang : "plaintext";
+      return hljs.highlight(code, { language }).value;
+    },
+  })
+);
 
 function loadTemplate(template) {
   return fs.readFileSync(path.join(TEMPLATE_DIR, `${template}.html`), "utf-8");
@@ -40,7 +53,7 @@ function cleanDirectory(directory, excludeFiles = []) {
 }
 
 function generateIndexPage() {
-  const layoutTemplate = loadTemplate("layout");
+  const baseTemplate = loadTemplate("base");
   const headerTemplate = loadTemplate("header");
   const footerTemplate = loadTemplate("footer");
 
@@ -48,13 +61,14 @@ function generateIndexPage() {
   const postItemTemplate = loadTemplate("post-item");
 
   const header = renderTemplate(headerTemplate, {
-    name: config.name,
-    github: config.github,
+    name: config.author.name,
+    resume: config.author.resume,
+    github: config.author.github,
   });
 
   const footer = renderTemplate(footerTemplate, {
     year: new Date().getFullYear(),
-    name: config.name,
+    name: config.author.name,
   });
 
   const postDirs = fs.readdirSync(CONTENT_DIR);
@@ -79,7 +93,8 @@ function generateIndexPage() {
             day: "numeric",
           }),
           title: metadata.title,
-          preview: marked(content)
+          preview: marked
+            .parse(content)
             .replace(/<[^>]*>/g, "")
             .slice(0, 300),
           slug: dir,
@@ -96,35 +111,36 @@ function generateIndexPage() {
     posts: postItems,
   });
 
-  const page = renderTemplate(layoutTemplate, {
-    header,
-    footer,
-    content,
-    title: config.name,
-    description: `All the latest ${config.name} posts, straight from the head.`,
+  const page = renderTemplate(baseTemplate, {
+    title: config.author.name,
+    description: `All the latest ${config.author.name} posts, straight from the head.`,
     base: config.base,
     slug: "/",
-    image: "/logo.png",
+    ogImage: "/og-image.png",
+    header,
+    content,
+    footer,
   });
 
   fs.writeFileSync(path.join(OUTPUT_DIR, "index.html"), page);
 }
 
 function generatePostPage() {
-  const layoutTemplate = loadTemplate("layout");
+  const baseTemplate = loadTemplate("base");
   const headerTemplate = loadTemplate("header");
   const footerTemplate = loadTemplate("footer");
 
   const postDetailTemplate = loadTemplate("post-detail");
 
   const header = renderTemplate(headerTemplate, {
-    name: config.name,
-    github: config.github,
+    name: config.author.name,
+    resume: config.author.resume,
+    github: config.author.github,
   });
 
   const footer = renderTemplate(footerTemplate, {
     year: new Date().getFullYear(),
-    name: config.name,
+    name: config.author.name,
   });
 
   const postDirs = fs.readdirSync(CONTENT_DIR);
@@ -165,16 +181,16 @@ function generatePostPage() {
     };
 
     const postContent = renderTemplate(postDetailTemplate, {
+      date: metadata.date,
       localeDate: new Date(metadata.date).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
       }),
-      date: metadata.date,
       title: metadata.title,
-      github: config.github,
-      name: config.name,
-      content: adjustImagePaths(marked(content)),
+      github: config.author.github,
+      name: config.author.name,
+      content: adjustImagePaths(marked.parse(content)),
       repo: config.giscus.repo,
       repoId: config.giscus.repoId,
       category: config.giscus.category,
@@ -186,17 +202,18 @@ function generatePostPage() {
       lang: config.giscus.lang,
     });
 
-    const page = renderTemplate(layoutTemplate, {
-      header,
-      footer,
-      content: postContent,
-      title: `${metadata.title} - ${config.name}`,
-      description: marked(content)
+    const page = renderTemplate(baseTemplate, {
+      title: `${metadata.title} - ${config.author.name}`,
+      description: marked
+        .parse(content)
         .replace(/<[^>]*>/g, "")
         .slice(0, 120),
       base: config.base,
       slug: `/${dir}`,
-      image: "/logo.png",
+      ogImage: "/og-image.png",
+      header,
+      content: postContent,
+      footer,
     });
 
     fs.writeFileSync(path.join(outputDir, "index.html"), page);
@@ -243,7 +260,14 @@ if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR);
 }
 
-cleanDirectory("public", ["styles", "favicon.ico", "logo.png", "robots.txt"]);
+cleanDirectory("public", [
+  "styles",
+  "fonts",
+  "favicon.ico",
+  "og-image.png",
+  "robots.txt",
+]);
+
 generateIndexPage();
 generatePostPage();
 generateSitemap();

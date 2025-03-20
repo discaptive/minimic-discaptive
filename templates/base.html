@@ -1,5 +1,6 @@
+<!-- title, description, base, slug, ogImage, header, content, footer -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="antialiased">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,17 +21,15 @@
     <meta property="og:url" content="{{base}}{{slug}}" />
     <meta property="og:site_name" content="{{name}}" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="{{base}}{{image}}" />
+    <meta property="og:image" content="{{base}}{{ogImage}}" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{title}}" />
     <meta name="twitter:description" content="{{description}}" />
-    <meta name="twitter:image" content="{{base}}{{image}}" />
+    <meta name="twitter:image" content="{{base}}{{ogImage}}" />
   </head>
-  <body class="font-noto max-w-6xl mx-auto">
-    {{header}}
-    <main class="mt-14">{{content}}</main>
-    {{footer}}
+  <body class="font-inter max-w-4xl mx-auto px-4">
+    {{header}} {{content}} {{footer}}
   </body>
 </html>
