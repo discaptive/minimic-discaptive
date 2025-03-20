@@ -118,7 +118,7 @@ function generateIndexPage() {
     .join("\n");
 
   const content = renderTemplate(postListTemplate, {
-    name: config.name,
+    name: config.author.name,
     posts: postItems,
   });
 
